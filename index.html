@@ -6,9 +6,6 @@
   <title>dionn001 | Roblox Builder & Map Designer</title>
   <meta name="description" content="Official portfolio of dionn001 — Roblox Builder, Map Designer, and 3D Environment Artist experienced across multiple Roblox games." />
   <style>
-    /* ==========================================================================
-       1. CSS VARIABLES & THEME CONFIGURATION
-       ========================================================================== */
     :root {
       --bg-primary: #060b19;
       --bg-secondary: #0b142c;
@@ -44,9 +41,6 @@
       --transition-smooth: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* ==========================================================================
-       2. RESET & BASE TYPOGRAPHY
-       ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -67,7 +61,6 @@
       position: relative;
     }
 
-    /* Blueprint Grid Background */
     body::before {
       content: "";
       position: fixed;
@@ -122,9 +115,6 @@
       padding: 0 1.5rem;
     }
 
-    /* ==========================================================================
-       3. NAVIGATION BAR
-       ========================================================================== */
     .navbar {
       position: sticky;
       top: 0;
@@ -260,9 +250,6 @@
       font-size: 1.2rem;
     }
 
-    /* ==========================================================================
-       4. HERO SECTION
-       ========================================================================== */
     .hero {
       padding: 5.5rem 0 4rem;
       text-align: center;
@@ -426,9 +413,6 @@
       font-weight: 500;
     }
 
-    /* ==========================================================================
-       5. SECTIONS & REVEALS
-       ========================================================================== */
     section {
       padding: 4.5rem 0;
     }
@@ -471,9 +455,6 @@
       transform: translateY(0);
     }
 
-    /* ==========================================================================
-       6. ABOUT & PROFILE PANEL
-       ========================================================================== */
     .about-grid {
       display: grid;
       grid-template-columns: 1.35fr 1fr;
@@ -571,9 +552,6 @@
       font-weight: 600;
     }
 
-    /* ==========================================================================
-       7. SKILLS & SPECIALTIES
-       ========================================================================== */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -638,9 +616,6 @@
       font-weight: 600;
     }
 
-    /* ==========================================================================
-       8. FEATURED BUILDS
-       ========================================================================== */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -758,9 +733,6 @@
       cursor: pointer;
     }
 
-    /* ==========================================================================
-       9. TROUBLESHOOTING / HULP ALS DE WEBSITE NIET WERKT
-       ========================================================================== */
     .troubleshoot-box {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -827,9 +799,6 @@
       gap: 1rem;
     }
 
-    /* ==========================================================================
-       10. MODALS (PROJECTS & ADMIN SETTINGS)
-       ========================================================================== */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -958,9 +927,6 @@
       display: block;
     }
 
-    /* ==========================================================================
-       11. FOOTER
-       ========================================================================== */
     footer {
       border-top: 1px solid var(--border-subtle);
       background: rgba(6, 11, 25, 0.9);
@@ -1058,7 +1024,7 @@
           <button class="copy-user-btn" id="copyUserBtn" type="button">Copy</button>
         </div>
 
-        <p class="hero-subtitle" id="heroSubtitleText">
+        <p class="hero-subtitle">
           Dedicated Roblox Builder & Environment Designer with hands-on experience developing maps,
           lobbies, and custom structures across many different Roblox games.
         </p>
@@ -1104,12 +1070,12 @@
 
         <div class="about-grid">
           <div class="about-panel">
-            <p id="aboutText1">
+            <p>
               Hi! I'm <strong>dionn001</strong>, a Roblox Builder developer passionate about designing
               immersive environments and memorable maps. Over time, I have worked as a builder on many
               different Roblox games, helping teams and solo creators bring their ideas to life.
             </p>
-            <p id="aboutText2">
+            <p>
               Whether a game needs an inviting spawn lobby, an expansive simulator map, a challenging
               obby course, or custom architectural props, I focus on clean proportions, clear player
               navigation, and smooth performance in Roblox Studio.
@@ -1260,7 +1226,7 @@
       </div>
     </section>
 
-    <!-- TROUBLESHOOTING SECTION (ALS DE WEBSITE NIET WERKT) -->
+    <!-- TROUBLESHOOTING SECTION -->
     <section id="troubleshoot">
       <div class="container reveal">
         <div class="troubleshoot-box">
@@ -1268,15 +1234,15 @@
           <div class="troubleshoot-list">
             <div class="troubleshoot-item">
               <h4>1. 404 Not Found of Page Not Found?</h4>
-              <p>Zorg ervoor dat je bestand op GitHub exact <strong>index.html</strong> heet (met kleine letters en de juiste extensie).</p>
+              <p>Zorg ervoor dat je bestand op GitHub exact <strong>index.html</strong> heet (met kleine letters).</p>
             </div>
             <div class="troubleshoot-item">
-              <h4>2. Wijzigingen zijn niet zichtbaar?</h4>
-              <p>GitHub Pages kan soms 1 tot 2 minuten nodig hebben om te updaten. Druk op je toetsenbord op <strong>Ctrl + F5</strong> om je browser-cache te legen.</p>
+              <h4>2. Wijzigingen niet zichtbaar?</h4>
+              <p>GitHub Pages kan 1 tot 2 minuten nodig hebben. Druk in je browser op <strong>Ctrl + F5</strong> om te vernieuwen.</p>
             </div>
             <div class="troubleshoot-item">
               <h4>3. GitHub Pages staat niet aan?</h4>
-              <p>Ga in je GitHub repository naar <strong>Settings > Pages</strong>, zorg dat de bron op <strong>main</strong> en <strong>/ (root)</strong> staat en klik op Save.</p>
+              <p>Ga in je repository naar <strong>Settings > Pages</strong>, zet de branch op <strong>main</strong> en klik op Save.</p>
             </div>
           </div>
         </div>
@@ -1305,25 +1271,25 @@
     </div>
   </div>
 
-  <!-- ADMIN SETTINGS MODAL (PASSWORD: 6767) -->
+  <!-- ADMIN SETTINGS MODAL -->
   <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true">
     <div class="modal-card">
       <button class="modal-close" id="settingsClose">✕</button>
       <span class="modal-tag">Admin Panel</span>
       <h3>Website Settings</h3>
-      <p>Enter the administrator password (<strong>6767</strong>) to unlock customization settings.</p>
+      <p>Enter the administrator password to unlock customization settings.</p>
 
       <!-- Step 1: Password Form -->
       <div id="passwordSection">
         <div class="form-group">
           <label for="adminPasswordInput">Password:</label>
-          <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter password (6767)..." />
+          <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter password..." />
           <div class="error-msg" id="passwordError">Incorrect password. Try again!</div>
         </div>
         <button type="button" class="btn-primary" id="submitPasswordBtn" style="width: 100%; justify-content: center;">Unlock Settings</button>
       </div>
 
-      <!-- Step 2: Unlocked Admin Controls (Afbeelding & Teksten aanpassen) -->
+      <!-- Step 2: Unlocked Admin Controls -->
       <div class="admin-controls" id="adminControlsSection">
         <div class="form-group">
           <label for="customStatusInput">Hero Status Text:</label>
@@ -1334,7 +1300,7 @@
           <input type="text" id="customUsernameInput" class="form-input" value="dionn001" />
         </div>
         <div class="form-group">
-          <label for="customAvatarInput">Avatar Afbeelding URL (Link naar afbeelding):</label>
+          <label for="customAvatarInput">Avatar Afbeelding URL:</label>
           <input type="text" id="customAvatarInput" class="form-input" placeholder="https://voorbeeld.nl/jouw-plaatje.png" />
         </div>
         <button type="button" class="btn-primary" id="saveSettingsBtn" style="width: 100%; justify-content: center; margin-top: 0.5rem;">Save Changes ✓</button>
@@ -1417,7 +1383,6 @@
     modalClose.addEventListener('click', () => modal.classList.remove('open'));
     modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
 
-    // SETTINGS MODAL & PASSWORD (6767)
     const settingsModal = document.getElementById('settingsModal');
     const openSettingsBtn = document.getElementById('openSettingsBtn');
     const settingsClose = document.getElementById('settingsClose');
