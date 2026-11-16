@@ -3,222 +3,1516 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dionn001 | Roblox Builder</title>
+  <title>dionn001 | Roblox Builder & Map Designer</title>
+  <meta name="description" content="Official portfolio of dionn001 — Roblox Builder, Map Designer, and 3D Environment Artist experienced across multiple Roblox games." />
   <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & THEME CONFIGURATION
+       ========================================================================== */
     :root {
-      --bg: #0a1128;
-      --card: #111d4a;
-      --primary: #3b82f6;
-      --accent: #60a5fa;
-      --text: #f8fafc;
-      --muted: #94a3b8;
+      --bg-primary: #060b19;
+      --bg-secondary: #0b142c;
+      --bg-card: #0f1c3f;
+      --bg-card-hover: #142554;
+      --bg-glass: rgba(11, 20, 44, 0.82);
+
+      --blue-deep: #1e3a8a;
+      --blue-main: #2563eb;
+      --blue-bright: #3b82f6;
+      --blue-glow: #60a5fa;
+      --cyan-accent: #38bdf8;
+
+      --text-main: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+
+      --border-subtle: rgba(59, 130, 246, 0.22);
+      --border-strong: rgba(96, 165, 250, 0.5);
+
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.14);
+
+      --shadow-card: 0 12px 32px rgba(2, 6, 23, 0.55);
+      --shadow-glow: 0 0 28px rgba(59, 130, 246, 0.28);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --transition-fast: 0.2s ease;
+      --transition-smooth: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    * {
+    /* ==========================================================================
+       2. RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: 'Segoe UI', Inter, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    header {
-      background: linear-gradient(135deg, #1d4ed8, #0f172a);
-      padding: 5rem 1.5rem;
-      text-align: center;
-      border-bottom: 2px solid var(--primary);
+    /* Subtle Blueprint Grid Background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: -2;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.35rem;
-      letter-spacing: 1px;
+    /* Ambient Radial Glows */
+    .ambient-glow-1,
+    .ambient-glow-2 {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.45;
     }
 
-    header span {
-      color: var(--accent);
+    .ambient-glow-1 {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, #1d4ed8 0%, transparent 70%);
+      top: -120px;
+      left: -100px;
     }
 
-    .handle {
-      display: inline-block;
-      background: rgba(59, 130, 246, 0.2);
-      color: var(--accent);
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(96, 165, 250, 0.35);
+    .ambient-glow-2 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #0284c7 0%, transparent 70%);
+      bottom: -160px;
+      right: -120px;
     }
 
-    header p {
-      font-size: 1.2rem;
-      color: #cbd5e1;
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: var(--primary);
-      color: white;
-      padding: 0.75rem 1.75rem;
-      border-radius: 8px;
+    a {
+      color: inherit;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.2s;
     }
 
-    .btn:hover {
-      background-color: #2563eb;
+    ul {
+      list-style: none;
     }
 
-    main {
-      max-width: 900px;
-      margin: 3rem auto;
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
       padding: 0 1.5rem;
     }
 
-    section {
-      margin-bottom: 3.5rem;
+    /* ==========================================================================
+       3. NAVIGATION BAR
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background var(--transition-fast);
     }
 
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-      border-left: 4px solid var(--primary);
-      padding-left: 0.75rem;
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
     }
 
-    .about-box {
-      background-color: var(--card);
-      padding: 1.75rem;
-      border-radius: 12px;
-      border: 1px solid #1e3a8a;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.4px;
     }
 
-    .grid {
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep));
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      place-items: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
+      border: 1px solid rgba(147, 197, 253, 0.4);
     }
 
-    .card {
-      background-color: var(--card);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid #1e3a8a;
-      transition: transform 0.2s;
+    .brand span {
+      color: var(--blue-glow);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
     }
 
-    .card h3 {
-      margin-bottom: 0.5rem;
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: #ffffff;
     }
 
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: var(--cyan-accent);
+      transition: width var(--transition-fast);
+      border-radius: 2px;
     }
 
-    .tag {
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-roblox-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--blue-main), var(--blue-deep));
+      color: #fff;
+      padding: 0.55rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid var(--border-strong);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-roblox-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.45rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 5.5rem 0 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--success-bg);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.45); opacity: 0.65; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(90deg, #60a5fa, #38bdf8, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .roblox-tag-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(30, 58, 138, 0.35);
+      border: 1px solid var(--border-strong);
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.4rem;
+      font-size: 0.95rem;
+      color: #bfdbfe;
+    }
+
+    .copy-user-btn {
+      background: rgba(59, 130, 246, 0.25);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #fff;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .copy-user-btn:hover {
+      background: var(--blue-bright);
+    }
+
+    .hero-subtitle {
+      max-width: 680px;
+      margin: 0 auto 2.25rem;
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue-main));
+      color: #fff;
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+      border: 1px solid rgba(147, 197, 253, 0.45);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      color: var(--text-main);
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--border-strong);
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+
+    /* Quick Stats Strip */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: linear-gradient(180deg, rgba(15, 28, 63, 0.9), rgba(11, 20, 44, 0.95));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.4rem 1.25rem;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue-glow);
+    }
+
+    .stat-number {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--cyan-accent);
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       5. SHARED SECTION HEADERS & REVEAL ANIMATIONS
+       ========================================================================== */
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-eyebrow {
       display: inline-block;
-      background: rgba(59, 130, 246, 0.2);
-      color: var(--accent);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cyan-accent);
+      margin-bottom: 0.45rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 640px;
+      font-size: 1.02rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       6. ABOUT & BUILDER PROFILE SECTION
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .about-panel,
+    .profile-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .about-panel p {
+      color: var(--text-secondary);
+      margin-bottom: 1.15rem;
+      font-size: 1.02rem;
+    }
+
+    .about-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .profile-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(145deg, #11214d, #0b1532);
+      border-color: var(--border-strong);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .avatar-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      border: 2px solid #93c5fd;
+      flex-shrink: 0;
+    }
+
+    .profile-meta h3 {
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .profile-meta span {
+      font-size: 0.9rem;
+      color: var(--blue-glow);
+    }
+
+    .spec-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.93rem;
+      padding: 0.55rem 0.75rem;
+      background: rgba(6, 11, 25, 0.45);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(59, 130, 246, 0.14);
+    }
+
+    .spec-item span:first-child {
+      color: var(--text-muted);
+    }
+
+    .spec-item span:last-child {
+      color: #fff;
       font-weight: 600;
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--muted);
-      border-top: 1px solid #1e293b;
+    /* ==========================================================================
+       7. SKILLS & BUILDING SPECIALTIES
+       ========================================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition-smooth), border-color var(--transition-fast), background var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--blue-glow);
+      background: var(--bg-card-hover);
+    }
+
+    .skill-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.18);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      margin-bottom: 1.15rem;
+      color: var(--cyan-accent);
+    }
+
+    .skill-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+      color: #ffffff;
+    }
+
+    .skill-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .chip {
+      background: rgba(37, 99, 235, 0.22);
+      color: #93c5fd;
+      border: 1px solid rgba(96, 165, 250, 0.28);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       8. FEATURED BUILDS SHOWCASE WITH FILTERING
+       ========================================================================== */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 0.5rem 1.15rem;
+      border-radius: var(--radius-full);
       font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--blue-glow);
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: var(--blue-main);
+      color: #fff;
+      border-color: var(--blue-glow);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition-smooth), border-color var(--transition-fast);
+    }
+
+    .project-card.hidden {
+      display: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--cyan-accent);
+    }
+
+    .project-banner {
+      height: 155px;
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+
+    .project-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(96, 165, 250, 0.25) 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity: 0.6;
+    }
+
+    .project-badge {
+      position: relative;
+      z-index: 1;
+      background: rgba(6, 11, 25, 0.82);
+      border: 1px solid var(--border-strong);
+      color: var(--cyan-accent);
+      padding: 0.28rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .project-body {
+      padding: 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-body h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.55rem;
+      color: #fff;
+    }
+
+    .project-body p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .role-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--blue-glow);
+    }
+
+    .btn-details {
+      background: rgba(59, 130, 246, 0.18);
+      color: #fff;
+      border: 1px solid var(--border-strong);
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .btn-details:hover {
+      background: var(--blue-bright);
+    }
+
+    /* ==========================================================================
+       9. WORKFLOW & COMMISSIONS CALLOUT
+       ========================================================================== */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .step-num {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--cyan-accent);
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-card h4 {
+      font-size: 1.08rem;
+      margin-bottom: 0.45rem;
+      color: #fff;
+    }
+
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #172554, #0f172a);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-box p {
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 1.75rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       10. PROJECT MODAL
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      z-index: 200;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      max-width: 540px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      position: relative;
+      animation: modalPop 0.25s ease;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.94); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+      border-color: var(--blue-glow);
+    }
+
+    .modal-tag {
+      display: inline-block;
+      color: var(--cyan-accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-card h3 {
+      font-size: 1.55rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .modal-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      font-size: 0.98rem;
+    }
+
+    .modal-highlights {
+      background: rgba(6, 11, 25, 0.55);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-highlights li {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .modal-highlights li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--cyan-accent);
+    }
+
+    /* ==========================================================================
+       11. FOOTER & RESPONSIVE QUERIES
+       ========================================================================== */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(6, 11, 25, 0.9);
+      padding: 2.5rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue-glow);
+    }
+
+    @media (max-width: 860px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-subtle);
+        gap: 1.1rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: inline-block;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Hi, I'm <span>dionn001</span></h1>
-    <div class="handle">Roblox: @dionn001</div>
-    <p>Roblox Builder & Map Designer — experienced in building environments and worlds across many different games.</p>
-    <a href="#projects" class="btn">View My Builds</a>
+  <!-- Ambient Glows -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- ========================================================================
+       NAVIGATION
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <div class="brand-icon">D</div>
+        <div>dionn<span>001</span></div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#builds">Builds</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-roblox-nav">
+          Roblox Profile ↗
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="about-box">
-        <p>
-          Welcome to my portfolio! I'm <strong>dionn001</strong> on Roblox and I am a Roblox Builder. 
-          Over time, I have worked as a builder on many different games, creating detailed maps, 
-          custom structures, and immersive environments for players on Roblox.
+  <!-- ========================================================================
+       HERO SECTION
+       ======================================================================== -->
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          Builder Developer • Open for Projects
+        </div>
+
+        <h1>Building Worlds on Roblox as <span class="highlight">dionn001</span></h1>
+
+        <div class="roblox-tag-bar">
+          <span>Roblox Username: <strong>@dionn001</strong></span>
+          <button class="copy-user-btn" id="copyUserBtn" type="button">Copy</button>
+        </div>
+
+        <p class="hero-subtitle">
+          Dedicated Roblox Builder & Environment Designer with hands-on experience developing maps,
+          lobbies, and custom structures across many different Roblox games.
         </p>
+
+        <div class="hero-buttons">
+          <a href="#builds" class="btn-primary">Explore My Builds</a>
+          <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            View @dionn001 on Roblox ↗
+          </a>
+        </div>
+
+        <!-- Quick Portfolio Stats -->
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <div class="stat-number" data-target="15">15+</div>
+            <div class="stat-label">Games Contributed To</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">Builder</div>
+            <div class="stat-label">Primary Dev Role</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Roblox Studio Focused</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">Multi-Genre</div>
+            <div class="stat-label">Maps, Lobbies & Worlds</div>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- ======================================================================
+         ABOUT SECTION
+         ====================================================================== -->
+    <section id="about">
+      <div class="container reveal">
+        <div class="section-header">
+          <span class="section-eyebrow">Developer Overview</span>
+          <h2 class="section-title">About dionn001</h2>
+          <p class="section-desc">
+            Turning game concepts into playable, detailed, and well-structured Roblox worlds.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-panel">
+            <p>
+              Hi! I'm <strong>dionn001</strong>, a Roblox Builder developer passionate about designing
+              immersive environments and memorable maps. Over time, I have worked as a builder on many
+              different Roblox games, helping teams and solo creators bring their ideas to life.
+            </p>
+            <p>
+              Whether a game needs an inviting spawn lobby, an expansive simulator map, a challenging
+              obby course, or custom architectural props, I focus on clean proportions, clear player
+              navigation, and smooth performance in Roblox Studio.
+            </p>
+            <p>
+              I enjoy collaborating with scripters, UI designers, and project owners to make sure every
+              build fits the gameplay mechanics seamlessly.
+            </p>
+          </div>
+
+          <aside class="profile-panel">
+            <div>
+              <div class="profile-header">
+                <div class="avatar-box">D1</div>
+                <div class="profile-meta">
+                  <h3>dionn001</h3>
+                  <span>Roblox Builder Developer</span>
+                </div>
+              </div>
+
+              <div class="spec-list">
+                <div class="spec-item">
+                  <span>Roblox User</span>
+                  <span>@dionn001</span>
+                </div>
+                <div class="spec-item">
+                  <span>Main Specialty</span>
+                  <span>Map & Lobby Building</span>
+                </div>
+                <div class="spec-item">
+                  <span>Tools</span>
+                  <span>Roblox Studio</span>
+                </div>
+                <div class="spec-item">
+                  <span>Experience</span>
+                  <span>Multiple Roblox Games</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center;">
+              Open Roblox Profile ↗
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SKILLS & SPECIALTIES SECTION
+         ====================================================================== -->
     <section id="skills">
-      <h2>What I Do</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Map & Environment Building</h3>
-          <p>Designing and building detailed maps, lobbies, and worlds tailored to each game's style.</p>
-          <span class="tag">Roblox Studio</span>
+      <div class="container reveal">
+        <div class="section-header">
+          <span class="section-eyebrow">What I Build</span>
+          <h2 class="section-title">Builder Specialties</h2>
+          <p class="section-desc">
+            Core building skills I bring to every Roblox development team.
+          </p>
         </div>
-        <div class="card">
-          <h3>Props & Architecture</h3>
-          <p>Creating custom buildings, assets, and level layouts with clean geometry and lighting.</p>
-          <span class="tag">3D Building</span>
-        </div>
-        <div class="card">
-          <h3>Multi-Game Experience</h3>
-          <p>Collaborating as a builder across various genres, from simulators and obbies to adventure games.</p>
-          <span class="tag">Team & Solo Dev</span>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div>
+              <div class="skill-icon">🏛️</div>
+              <h3>Lobbies & Spawn Hubs</h3>
+              <p>
+                Designing welcoming main hubs with clear paths for leaderboards, shop zones,
+                portals, and player gathering areas.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="chip">Spawn Design</span>
+              <span class="chip">Layout Flow</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div>
+              <div class="skill-icon">🗺️</div>
+              <h3>Full Game Maps & Zones</h3>
+              <p>
+                Creating themed worlds, progression areas, and multi-stage environments tailored to
+                simulators, adventure games, and obbies.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="chip">World Building</span>
+              <span class="chip">Themed Zones</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div>
+              <div class="skill-icon">🧱</div>
+              <h3>Custom Structures & Props</h3>
+              <p>
+                Building detailed buildings, interiors, landmarks, and environmental decorations
+                using clean part construction.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="chip">Architecture</span>
+              <span class="chip">3D Assets</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div>
+              <div class="skill-icon">💡</div>
+              <h3>Atmosphere & Optimization</h3>
+              <p>
+                Balancing lighting, color palettes, and part counts so maps look sharp while running
+                smoothly across PC and mobile devices.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="chip">Lighting</span>
+              <span class="chip">Lag-Free Builds</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="projects">
-      <h2>Featured Builds</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Game Project #1</h3>
-          <p>Add the name of one of your Roblox games here and describe the map or builds you created.</p>
-          <span class="tag">Builder</span>
+    <!-- ======================================================================
+         FEATURED BUILDS SECTION
+         ====================================================================== -->
+    <section id="builds">
+      <div class="container reveal">
+        <div class="section-header">
+          <span class="section-eyebrow">Portfolio Showcase</span>
+          <h2 class="section-title">Featured Builds & Games</h2>
+          <p class="section-desc">
+            A look at the types of maps and builds I have developed across different Roblox projects.
+          </p>
         </div>
-        <div class="card">
-          <h3>Game Project #2</h3>
-          <p>Add another game you worked on here, including what areas or structures you built.</p>
-          <span class="tag">Builder</span>
+
+        <!-- Filter Buttons -->
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All Builds</button>
+          <button class="filter-btn" data-filter="lobby">Lobbies & Hubs</button>
+          <button class="filter-btn" data-filter="simulator">Simulator Maps</button>
+          <button class="filter-btn" data-filter="obby">Obby & Adventure</button>
         </div>
-        <div class="card">
-          <h3>More Games</h3>
-          <p>Built maps, lobbies, and assets for numerous other Roblox experiences.</p>
-          <span class="tag">Builder Dev</span>
+
+        <!-- Project Cards Grid -->
+        <div class="projects-grid">
+          <article class="project-card" data-category="lobby">
+            <div class="project-banner">
+              <span class="project-badge">Lobby & Hub</span>
+            </div>
+            <div class="project-body">
+              <div>
+                <h3>Main Game Lobby & Shop Hub</h3>
+                <p>
+                  Custom spawn plaza featuring dedicated shop buildings, portal rings, leaderboard
+                  stands, and clean player pathways.
+                </p>
+              </div>
+              <div class="project-footer">
+                <span class="role-label">Role: Lead Builder</span>
+                <button
+                  class="btn-details"
+                  data-title="Main Game Lobby & Shop Hub"
+                  data-category="Lobby & Hub"
+                  data-desc="Built a complete central hub designed to handle high player traffic while keeping shops, portals, and leaderboards easy to spot."
+                  data-points="Custom shop exteriors and interactive zones|Dedicated portal area for teleporting to game modes|Optimized part count for fast loading"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="simulator">
+            <div class="project-banner">
+              <span class="project-badge">Simulator World</span>
+            </div>
+            <div class="project-body">
+              <div>
+                <h3>Multi-Zone Simulator Map</h3>
+                <p>
+                  Designed progression zones with distinct visual themes, upgrade stations, and
+                  balanced open spaces for grinding gameplay.
+                </p>
+              </div>
+              <div class="project-footer">
+                <span class="role-label">Role: Map Builder</span>
+                <button
+                  class="btn-details"
+                  data-title="Multi-Zone Simulator Map"
+                  data-category="Simulator World"
+                  data-desc="Constructed interconnected simulator areas where each unlocked gate introduces a fresh environment and landmarks."
+                  data-points="Clear visual progression between unlockable zones|Custom upgrade booths and egg/pet display areas|Consistent color theme and lighting setup"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="obby">
+            <div class="project-banner">
+              <span class="project-badge">Obby & Adventure</span>
+            </div>
+            <div class="project-body">
+              <div>
+                <h3>Themed Obstacle & Adventure Stages</h3>
+                <p>
+                  Created varied platforming stages, checkpoints, and environmental backdrops across
+                  multiple Roblox experiences.
+                </p>
+              </div>
+              <div class="project-footer">
+                <span class="role-label">Role: Builder Dev</span>
+                <button
+                  class="btn-details"
+                  data-title="Themed Obstacle & Adventure Stages"
+                  data-category="Obby & Adventure"
+                  data-desc="Developed engaging obstacle layouts and scenic environments that keep players motivated from stage to stage."
+                  data-points="Well-spaced jumps and fair platform alignment|Distinct stage themes and checkpoint landmarks|Tested for smooth playability"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         WORKFLOW SECTION
+         ====================================================================== -->
+    <section id="workflow">
+      <div class="container reveal">
+        <div class="section-header">
+          <span class="section-eyebrow">How I Work</span>
+          <h2 class="section-title">Development Process</h2>
+          <p class="section-desc">
+            A straightforward workflow when building for your Roblox game.
+          </p>
+        </div>
+
+        <div class="workflow-grid">
+          <div class="step-card">
+            <span class="step-num">STEP 01</span>
+            <h4>Concept & Layout</h4>
+            <p>Reviewing your game's theme, required map size, and key gameplay spots.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">STEP 02</span>
+            <h4>Blockout & Structure</h4>
+            <p>Building the core layout first to test scale, sightlines, and player movement.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">STEP 03</span>
+            <h4>Detailing & Lighting</h4>
+            <p>Adding architectural details, props, colors, and atmosphere in Roblox Studio.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">STEP 04</span>
+            <h4>Final Polish</h4>
+            <p>Organizing folders/models cleanly so scripters can easily hook up game systems.</p>
+          </div>
+        </div>
+
+        <!-- Call To Action -->
+        <div class="cta-box" id="contact">
+          <h2>Want to Work with dionn001?</h2>
+          <p>
+            Looking for a reliable Roblox Builder for your lobby, map, or upcoming game?
+            Find me on Roblox under <strong>@dionn001</strong>.
+          </p>
+          <div class="cta-actions">
+            <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              Find @dionn001 on Roblox ↗
+            </a>
+            <button type="button" class="btn-secondary" id="copyUsernameFooterBtn">
+              Copy Username: dionn001
+            </button>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- ========================================================================
+       PROJECT DETAILS MODAL
+       ======================================================================== -->
+  <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close Modal">✕</button>
+      <span class="modal-tag" id="modalCategory">Category</span>
+      <h3 id="modalTitle">Project Title</h3>
+      <p id="modalDesc">Project description goes here.</p>
+      <ul class="modal-highlights" id="modalPoints"></ul>
+      <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center;">
+        Contact @dionn001 on Roblox ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
   <footer>
-    <p>© 2026 dionn001 — Roblox Builder Portfolio</p>
+    <div class="container footer-inner">
+      <div>© 2026 <strong>dionn001</strong> — Roblox Builder Developer Portfolio</div>
+      <div class="footer-links">
+        <a href="#top">Back to Top ↑</a>
+        <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer">Roblox (@dionn001)</a>
+      </div>
+    </div>
   </footer>
 
+  <!-- ========================================================================
+       INTERACTIVE JAVASCRIPT
+       ======================================================================== -->
+  <script>
+    // 1. Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // 2. Copy Roblox Username Helper
+    function setupCopyButton(buttonElement, defaultText) {
+      if (!buttonElement) return;
+      buttonElement.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('dionn001');
+          buttonElement.textContent = 'Copied! ✓';
+          setTimeout(() => {
+            buttonElement.textContent = defaultText;
+          }, 2000);
+        } catch (err) {
+          buttonElement.textContent = 'User: dionn001';
+        }
+      });
+    }
+
+    setupCopyButton(document.getElementById('copyUserBtn'), 'Copy');
+    setupCopyButton(document.getElementById('copyUsernameFooterBtn'), 'Copy Username: dionn001');
+
+    // 3. Portfolio Category Filter
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // 4. Project Detail Modal
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalPoints = document.getElementById('modalPoints');
+
+    document.querySelectorAll('.btn-details').forEach(btn => {
+      btn.addEventListener('click', () => {
+        modalTitle.textContent = btn.getAttribute('data-title');
+        modalCategory.textContent = btn.getAttribute('data-category');
+        modalDesc.textContent = btn.getAttribute('data-desc');
+
+        const points = btn.getAttribute('data-points').split('|');
+        modalPoints.innerHTML = '';
+        points.forEach(point => {
+          const li = document.createElement('li');
+          li.textContent = point;
+          modalPoints.appendChild(li);
+        });
+
+        modal.classList.add('open');
+      });
+    });
+
+    modalClose.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    // 5. Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
 </body>
 </html>
