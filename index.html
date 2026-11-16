@@ -67,7 +67,7 @@
       position: relative;
     }
 
-    /* Subtle Blueprint Grid Background */
+    /* Blueprint Grid Background */
     body::before {
       content: "";
       position: fixed;
@@ -80,7 +80,6 @@
       z-index: -2;
     }
 
-    /* Ambient Radial Glows */
     .ambient-glow-1,
     .ambient-glow-2 {
       position: fixed;
@@ -134,7 +133,6 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border-subtle);
-      transition: background var(--transition-fast);
     }
 
     .nav-inner {
@@ -369,8 +367,8 @@
       font-size: 1rem;
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
       border: 1px solid rgba(147, 197, 253, 0.45);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
       cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .btn-primary:hover {
@@ -389,8 +387,8 @@
       font-weight: 600;
       font-size: 1rem;
       border: 1px solid var(--border-strong);
-      transition: background var(--transition-fast), transform var(--transition-fast);
       cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
     }
 
     .btn-secondary:hover {
@@ -398,7 +396,6 @@
       transform: translateY(-3px);
     }
 
-    /* Quick Stats Strip */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -413,12 +410,6 @@
       border-radius: var(--radius-md);
       padding: 1.4rem 1.25rem;
       box-shadow: var(--shadow-card);
-      transition: transform var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .stat-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--blue-glow);
     }
 
     .stat-number {
@@ -436,7 +427,7 @@
     }
 
     /* ==========================================================================
-       5. SHARED SECTION HEADERS & REVEAL ANIMATIONS
+       5. SECTIONS & REVEALS
        ========================================================================== */
     section {
       padding: 4.5rem 0;
@@ -481,7 +472,7 @@
     }
 
     /* ==========================================================================
-       6. ABOUT & BUILDER PROFILE SECTION
+       6. ABOUT & PROFILE PANEL
        ========================================================================== */
     .about-grid {
       display: grid;
@@ -503,10 +494,6 @@
       color: var(--text-secondary);
       margin-bottom: 1.15rem;
       font-size: 1.02rem;
-    }
-
-    .about-panel p:last-child {
-      margin-bottom: 0;
     }
 
     .profile-panel {
@@ -538,6 +525,13 @@
       color: #fff;
       border: 2px solid #93c5fd;
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .profile-meta h3 {
@@ -578,7 +572,7 @@
     }
 
     /* ==========================================================================
-       7. SKILLS & BUILDING SPECIALTIES
+       7. SKILLS & SPECIALTIES
        ========================================================================== */
     .skills-grid {
       display: grid;
@@ -592,7 +586,7 @@
       border-radius: var(--radius-md);
       padding: 1.75rem;
       box-shadow: var(--shadow-card);
-      transition: transform var(--transition-smooth), border-color var(--transition-fast), background var(--transition-fast);
+      transition: transform var(--transition-smooth), border-color var(--transition-fast);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -601,7 +595,6 @@
     .skill-card:hover {
       transform: translateY(-6px);
       border-color: var(--blue-glow);
-      background: var(--bg-card-hover);
     }
 
     .skill-icon {
@@ -646,7 +639,7 @@
     }
 
     /* ==========================================================================
-       8. FEATURED BUILDS SHOWCASE WITH FILTERING
+       8. FEATURED BUILDS
        ========================================================================== */
     .filter-bar {
       display: flex;
@@ -676,7 +669,6 @@
       background: var(--blue-main);
       color: #fff;
       border-color: var(--blue-glow);
-      box-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
     }
 
     .projects-grid {
@@ -693,16 +685,10 @@
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
-      transition: transform var(--transition-smooth), border-color var(--transition-fast);
     }
 
     .project-card.hidden {
       display: none;
-    }
-
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--cyan-accent);
     }
 
     .project-banner {
@@ -713,16 +699,6 @@
       align-items: flex-end;
       padding: 1.1rem;
       border-bottom: 1px solid var(--border-subtle);
-      overflow: hidden;
-    }
-
-    .project-banner::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(96, 165, 250, 0.25) 1px, transparent 1px);
-      background-size: 16px 16px;
-      opacity: 0.6;
     }
 
     .project-badge {
@@ -780,52 +756,47 @@
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background var(--transition-fast);
-    }
-
-    .btn-details:hover {
-      background: var(--blue-bright);
     }
 
     /* ==========================================================================
-       9. WORKFLOW & COMMISSIONS CALLOUT
+       9. TROUBLESHOOTING / HULP ALS DE WEBSITE NIET WERKT
        ========================================================================== */
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 3rem;
-    }
-
-    .step-card {
-      background: var(--bg-secondary);
+    .troubleshoot-box {
+      background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      margin-top: 3.5rem;
     }
 
-    .step-num {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--cyan-accent);
-      background: rgba(56, 189, 248, 0.14);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 0.2rem 0.6rem;
-      border-radius: 6px;
-      margin-bottom: 0.75rem;
-    }
-
-    .step-card h4 {
-      font-size: 1.08rem;
-      margin-bottom: 0.45rem;
+    .troubleshoot-box h3 {
+      font-size: 1.35rem;
       color: #fff;
+      margin-bottom: 1rem;
     }
 
-    .step-card p {
-      font-size: 0.9rem;
+    .troubleshoot-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .troubleshoot-item {
+      background: rgba(6, 11, 25, 0.5);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+    }
+
+    .troubleshoot-item h4 {
+      color: var(--cyan-accent);
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .troubleshoot-item p {
       color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .cta-box {
@@ -835,6 +806,7 @@
       padding: 2.75rem 2rem;
       text-align: center;
       box-shadow: var(--shadow-glow);
+      margin-top: 3.5rem;
     }
 
     .cta-box h2 {
@@ -856,7 +828,7 @@
     }
 
     /* ==========================================================================
-       10. MODALS (PROJECT DETAILS & SETTINGS PANEL)
+       10. MODALS (PROJECTS & ADMIN SETTINGS)
        ========================================================================== */
     .modal-backdrop {
       position: fixed;
@@ -883,12 +855,6 @@
       padding: 2rem;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
       position: relative;
-      animation: modalPop 0.25s ease;
-    }
-
-    @keyframes modalPop {
-      from { transform: scale(0.94); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     .modal-close {
@@ -903,11 +869,6 @@
       border-radius: 50%;
       font-size: 1.1rem;
       cursor: pointer;
-    }
-
-    .modal-close:hover {
-      color: #fff;
-      border-color: var(--blue-glow);
     }
 
     .modal-tag {
@@ -954,7 +915,6 @@
       color: var(--cyan-accent);
     }
 
-    /* Settings Password Form Styles */
     .form-group {
       margin-bottom: 1.15rem;
       text-align: left;
@@ -977,7 +937,6 @@
       border-radius: var(--radius-sm);
       font-size: 1rem;
       outline: none;
-      transition: border-color var(--transition-fast);
     }
 
     .form-input:focus {
@@ -1000,7 +959,7 @@
     }
 
     /* ==========================================================================
-       11. FOOTER & RESPONSIVE QUERIES
+       11. FOOTER
        ========================================================================== */
     footer {
       border-top: 1px solid var(--border-subtle);
@@ -1024,10 +983,6 @@
       gap: 1.5rem;
     }
 
-    .footer-links a:hover {
-      color: var(--blue-glow);
-    }
-
     @media (max-width: 860px) {
       .about-grid {
         grid-template-columns: 1fr;
@@ -1047,11 +1002,9 @@
         border-bottom: 1px solid var(--border-subtle);
         gap: 1.1rem;
       }
-
       .nav-links.open {
         display: flex;
       }
-
       .mobile-toggle {
         display: inline-block;
       }
@@ -1060,13 +1013,10 @@
 </head>
 <body>
 
-  <!-- Ambient Glows -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>
 
-  <!-- ========================================================================
-       NAVIGATION
-       ======================================================================== -->
+  <!-- NAVIGATION -->
   <header class="navbar">
     <div class="container nav-inner">
       <a href="#top" class="brand">
@@ -1078,7 +1028,7 @@
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#builds">Builds</a>
-        <a href="#workflow">Workflow</a>
+        <a href="#troubleshoot">Help / Fix</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -1092,9 +1042,7 @@
     </div>
   </header>
 
-  <!-- ========================================================================
-       HERO SECTION
-       ======================================================================== -->
+  <!-- HERO SECTION -->
   <main id="top">
     <section class="hero">
       <div class="container">
@@ -1122,7 +1070,6 @@
           </a>
         </div>
 
-        <!-- Quick Portfolio Stats -->
         <div class="stats-grid reveal">
           <div class="stat-card">
             <div class="stat-number">15+</div>
@@ -1144,9 +1091,7 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         ABOUT SECTION
-         ====================================================================== -->
+    <!-- ABOUT SECTION -->
     <section id="about">
       <div class="container reveal">
         <div class="section-header">
@@ -1169,16 +1114,12 @@
               obby course, or custom architectural props, I focus on clean proportions, clear player
               navigation, and smooth performance in Roblox Studio.
             </p>
-            <p>
-              I enjoy collaborating with scripters, UI designers, and project owners to make sure every
-              build fits the gameplay mechanics seamlessly.
-            </p>
           </div>
 
           <aside class="profile-panel">
             <div>
               <div class="profile-header">
-                <div class="avatar-box">D1</div>
+                <div class="avatar-box" id="avatarBoxContainer">D1</div>
                 <div class="profile-meta">
                   <h3 id="panelUsername">dionn001</h3>
                   <span>Roblox Builder Developer</span>
@@ -1213,17 +1154,13 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         SKILLS & SPECIALTIES SECTION
-         ====================================================================== -->
+    <!-- SKILLS SECTION -->
     <section id="skills">
       <div class="container reveal">
         <div class="section-header">
           <span class="section-eyebrow">What I Build</span>
           <h2 class="section-title">Builder Specialties</h2>
-          <p class="section-desc">
-            Core building skills I bring to every Roblox development team.
-          </p>
+          <p class="section-desc">Core building skills I bring to every Roblox development team.</p>
         </div>
 
         <div class="skills-grid">
@@ -1231,79 +1168,47 @@
             <div>
               <div class="skill-icon">🏛️</div>
               <h3>Lobbies & Spawn Hubs</h3>
-              <p>
-                Designing welcoming main hubs with clear paths for leaderboards, shop zones,
-                portals, and player gathering areas.
-              </p>
+              <p>Designing welcoming main hubs with clear paths for leaderboards, shop zones, and portals.</p>
             </div>
-            <div class="skill-tags">
-              <span class="chip">Spawn Design</span>
-              <span class="chip">Layout Flow</span>
-            </div>
+            <div class="skill-tags"><span class="chip">Spawn Design</span><span class="chip">Layout Flow</span></div>
           </div>
-
           <div class="skill-card">
             <div>
               <div class="skill-icon">🗺️</div>
               <h3>Full Game Maps & Zones</h3>
-              <p>
-                Creating themed worlds, progression areas, and multi-stage environments tailored to
-                simulators, adventure games, and obbies.
-              </p>
+              <p>Creating themed worlds, progression areas, and multi-stage environments for simulators.</p>
             </div>
-            <div class="skill-tags">
-              <span class="chip">World Building</span>
-              <span class="chip">Themed Zones</span>
-            </div>
+            <div class="skill-tags"><span class="chip">World Building</span><span class="chip">Themed Zones</span></div>
           </div>
-
           <div class="skill-card">
             <div>
               <div class="skill-icon">🧱</div>
               <h3>Custom Structures & Props</h3>
-              <p>
-                Building detailed buildings, interiors, landmarks, and environmental decorations
-                using clean part construction.
-              </p>
+              <p>Building detailed buildings, interiors, and landmarks using clean part construction.</p>
             </div>
-            <div class="skill-tags">
-              <span class="chip">Architecture</span>
-              <span class="chip">3D Assets</span>
-            </div>
+            <div class="skill-tags"><span class="chip">Architecture</span><span class="chip">3D Assets</span></div>
           </div>
-
           <div class="skill-card">
             <div>
               <div class="skill-icon">💡</div>
               <h3>Atmosphere & Optimization</h3>
-              <p>
-                Balancing lighting, color palettes, and part counts so maps look sharp while running
-                smoothly across PC and mobile devices.
-              </p>
+              <p>Balancing lighting and part counts so maps run smoothly across PC and mobile devices.</p>
             </div>
-            <div class="skill-tags">
-              <span class="chip">Lighting</span>
-              <span class="chip">Lag-Free Builds</span>
-            </div>
+            <div class="skill-tags"><span class="chip">Lighting</span><span class="chip">Lag-Free Builds</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         FEATURED BUILDS SECTION
-         ====================================================================== -->
+    <!-- BUILDS SECTION -->
     <section id="builds">
       <div class="container reveal">
         <div class="section-header">
           <span class="section-eyebrow">Portfolio Showcase</span>
           <h2 class="section-title">Featured Builds & Games</h2>
-          <p class="section-desc">
-            A look at the types of maps and builds I have developed across different Roblox projects.
-          </p>
+          <p class="section-desc">A look at the types of maps and builds I have developed across Roblox.</p>
         </div>
 
-        <!-- Filter Buttons -->
         <div class="filter-bar">
           <button class="filter-btn active" data-filter="all">All Builds</button>
           <button class="filter-btn" data-filter="lobby">Lobbies & Hubs</button>
@@ -1311,85 +1216,43 @@
           <button class="filter-btn" data-filter="obby">Obby & Adventure</button>
         </div>
 
-        <!-- Project Cards Grid -->
         <div class="projects-grid">
           <article class="project-card" data-category="lobby">
-            <div class="project-banner">
-              <span class="project-badge">Lobby & Hub</span>
-            </div>
+            <div class="project-banner"><span class="project-badge">Lobby & Hub</span></div>
             <div class="project-body">
               <div>
                 <h3>Main Game Lobby & Shop Hub</h3>
-                <p>
-                  Custom spawn plaza featuring dedicated shop buildings, portal rings, leaderboard
-                  stands, and clean player pathways.
-                </p>
+                <p>Custom spawn plaza featuring shop buildings, portal rings, and leaderboard stands.</p>
               </div>
               <div class="project-footer">
                 <span class="role-label">Role: Lead Builder</span>
-                <button
-                  class="btn-details"
-                  data-title="Main Game Lobby & Shop Hub"
-                  data-category="Lobby & Hub"
-                  data-desc="Built a complete central hub designed to handle high player traffic while keeping shops, portals, and leaderboards easy to spot."
-                  data-points="Custom shop exteriors and interactive zones|Dedicated portal area for teleporting to game modes|Optimized part count for fast loading"
-                >
-                  Details
-                </button>
+                <button class="btn-details" data-title="Main Game Lobby & Shop Hub" data-category="Lobby & Hub" data-desc="Built a complete central hub designed to handle high player traffic." data-points="Custom shop exteriors|Dedicated portal area|Optimized part count">Details</button>
               </div>
             </div>
           </article>
-
           <article class="project-card" data-category="simulator">
-            <div class="project-banner">
-              <span class="project-badge">Simulator World</span>
-            </div>
+            <div class="project-banner"><span class="project-badge">Simulator World</span></div>
             <div class="project-body">
               <div>
                 <h3>Multi-Zone Simulator Map</h3>
-                <p>
-                  Designed progression zones with distinct visual themes, upgrade stations, and
-                  balanced open spaces for grinding gameplay.
-                </p>
+                <p>Designed progression zones with distinct visual themes and upgrade stations.</p>
               </div>
               <div class="project-footer">
                 <span class="role-label">Role: Map Builder</span>
-                <button
-                  class="btn-details"
-                  data-title="Multi-Zone Simulator Map"
-                  data-category="Simulator World"
-                  data-desc="Constructed interconnected simulator areas where each unlocked gate introduces a fresh environment and landmarks."
-                  data-points="Clear visual progression between unlockable zones|Custom upgrade booths and egg/pet display areas|Consistent color theme and lighting setup"
-                >
-                  Details
-                </button>
+                <button class="btn-details" data-title="Multi-Zone Simulator Map" data-category="Simulator World" data-desc="Constructed interconnected simulator areas." data-points="Clear visual progression|Custom upgrade booths|Consistent color theme">Details</button>
               </div>
             </div>
           </article>
-
           <article class="project-card" data-category="obby">
-            <div class="project-banner">
-              <span class="project-badge">Obby & Adventure</span>
-            </div>
+            <div class="project-banner"><span class="project-badge">Obby & Adventure</span></div>
             <div class="project-body">
               <div>
-                <h3>Themed Obstacle & Adventure Stages</h3>
-                <p>
-                  Created varied platforming stages, checkpoints, and environmental backdrops across
-                  multiple Roblox experiences.
-                </p>
+                <h3>Themed Obstacle Stages</h3>
+                <p>Created varied platforming stages, checkpoints, and environmental backdrops.</p>
               </div>
               <div class="project-footer">
                 <span class="role-label">Role: Builder Dev</span>
-                <button
-                  class="btn-details"
-                  data-title="Themed Obstacle & Adventure Stages"
-                  data-category="Obby & Adventure"
-                  data-desc="Developed engaging obstacle layouts and scenic environments that keep players motivated from stage to stage."
-                  data-points="Well-spaced jumps and fair platform alignment|Distinct stage themes and checkpoint landmarks|Tested for smooth playability"
-                >
-                  Details
-                </button>
+                <button class="btn-details" data-title="Themed Obstacle Stages" data-category="Obby & Adventure" data-desc="Developed engaging obstacle layouts." data-points="Well-spaced jumps|Distinct stage themes|Tested for playability">Details</button>
               </div>
             </div>
           </article>
@@ -1397,101 +1260,70 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         WORKFLOW SECTION
-         ====================================================================== -->
-    <section id="workflow">
+    <!-- TROUBLESHOOTING SECTION (ALS DE WEBSITE NIET WERKT) -->
+    <section id="troubleshoot">
       <div class="container reveal">
-        <div class="section-header">
-          <span class="section-eyebrow">How I Work</span>
-          <h2 class="section-title">Development Process</h2>
-          <p class="section-desc">
-            A straightforward workflow when building for your Roblox game.
-          </p>
-        </div>
-
-        <div class="workflow-grid">
-          <div class="step-card">
-            <span class="step-num">STEP 01</span>
-            <h4>Concept & Layout</h4>
-            <p>Reviewing your game's theme, required map size, and key gameplay spots.</p>
-          </div>
-          <div class="step-card">
-            <span class="step-num">STEP 02</span>
-            <h4>Blockout & Structure</h4>
-            <p>Building the core layout first to test scale, sightlines, and player movement.</p>
-          </div>
-          <div class="step-card">
-            <span class="step-num">STEP 03</span>
-            <h4>Detailing & Lighting</h4>
-            <p>Adding architectural details, props, colors, and atmosphere in Roblox Studio.</p>
-          </div>
-          <div class="step-card">
-            <span class="step-num">STEP 04</span>
-            <h4>Final Polish</h4>
-            <p>Organizing folders/models cleanly so scripters can easily hook up game systems.</p>
+        <div class="troubleshoot-box">
+          <h3>⚠️ Hulp / Wat te doen als de website niet werkt?</h3>
+          <div class="troubleshoot-list">
+            <div class="troubleshoot-item">
+              <h4>1. 404 Not Found of Page Not Found?</h4>
+              <p>Zorg ervoor dat je bestand op GitHub exact <strong>index.html</strong> heet (met kleine letters en de juiste extensie).</p>
+            </div>
+            <div class="troubleshoot-item">
+              <h4>2. Wijzigingen zijn niet zichtbaar?</h4>
+              <p>GitHub Pages kan soms 1 tot 2 minuten nodig hebben om te updaten. Druk op je toetsenbord op <strong>Ctrl + F5</strong> om je browser-cache te legen.</p>
+            </div>
+            <div class="troubleshoot-item">
+              <h4>3. GitHub Pages staat niet aan?</h4>
+              <p>Ga in je GitHub repository naar <strong>Settings > Pages</strong>, zorg dat de bron op <strong>main</strong> en <strong>/ (root)</strong> staat en klik op Save.</p>
+            </div>
           </div>
         </div>
 
-        <!-- Call To Action -->
         <div class="cta-box" id="contact">
           <h2>Want to Work with dionn001?</h2>
-          <p>
-            Looking for a reliable Roblox Builder for your lobby, map, or upcoming game?
-            Find me on Roblox under <strong>@dionn001</strong>.
-          </p>
+          <p>Looking for a reliable Roblox Builder for your lobby, map, or upcoming game? Find me under <strong>@dionn001</strong>.</p>
           <div class="cta-actions">
-            <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary">
-              Find @dionn001 on Roblox ↗
-            </a>
-            <button type="button" class="btn-secondary" id="copyUsernameFooterBtn">
-              Copy Username: dionn001
-            </button>
+            <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary">Find @dionn001 on Roblox ↗</a>
+            <button type="button" class="btn-secondary" id="copyUsernameFooterBtn">Copy Username: dionn001</button>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ========================================================================
-       PROJECT DETAILS MODAL
-       ======================================================================== -->
+  <!-- PROJECT DETAILS MODAL -->
   <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <button class="modal-close" id="modalClose" aria-label="Close Modal">✕</button>
+      <button class="modal-close" id="modalClose">✕</button>
       <span class="modal-tag" id="modalCategory">Category</span>
       <h3 id="modalTitle">Project Title</h3>
       <p id="modalDesc">Project description goes here.</p>
       <ul class="modal-highlights" id="modalPoints"></ul>
-      <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center;">
-        Contact @dionn001 on Roblox ↗
-      </a>
+      <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center;">Contact @dionn001 on Roblox ↗</a>
     </div>
   </div>
 
-  <!-- ========================================================================
-       SETTINGS / ADMIN PANEL MODAL (PASSWORD: 6767)
-       ======================================================================== -->
+  <!-- ADMIN SETTINGS MODAL (PASSWORD: 6767) -->
   <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <button class="modal-close" id="settingsClose" aria-label="Close Modal">✕</button>
+      <button class="modal-close" id="settingsClose">✕</button>
       <span class="modal-tag">Admin Panel</span>
       <h3>Website Settings</h3>
-      <p>Enter the administrator password to unlock website configuration settings.</p>
+      <p>Enter the administrator password (<strong>6767</strong>) to unlock customization settings.</p>
 
       <!-- Step 1: Password Form -->
       <div id="passwordSection">
         <div class="form-group">
-          <label for="adminPasswordInput">Password (6767):</label>
-          <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter password..." />
+          <label for="adminPasswordInput">Password:</label>
+          <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter password (6767)..." />
           <div class="error-msg" id="passwordError">Incorrect password. Try again!</div>
         </div>
-        <button type="button" class="btn-primary" id="submitPasswordBtn" style="width: 100%; justify-content: center;">
-          Unlock Settings
-        </button>
+        <button type="button" class="btn-primary" id="submitPasswordBtn" style="width: 100%; justify-content: center;">Unlock Settings</button>
       </div>
 
-      <!-- Step 2: Unlocked Admin Controls -->
+      <!-- Step 2: Unlocked Admin Controls (Afbeelding & Teksten aanpassen) -->
       <div class="admin-controls" id="adminControlsSection">
         <div class="form-group">
           <label for="customStatusInput">Hero Status Text:</label>
@@ -1501,43 +1333,33 @@
           <label for="customUsernameInput">Roblox Username:</label>
           <input type="text" id="customUsernameInput" class="form-input" value="dionn001" />
         </div>
-        <button type="button" class="btn-primary" id="saveSettingsBtn" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
-          Save Changes ✓
-        </button>
+        <div class="form-group">
+          <label for="customAvatarInput">Avatar Afbeelding URL (Link naar afbeelding):</label>
+          <input type="text" id="customAvatarInput" class="form-input" placeholder="https://voorbeeld.nl/jouw-plaatje.png" />
+        </div>
+        <button type="button" class="btn-primary" id="saveSettingsBtn" style="width: 100%; justify-content: center; margin-top: 0.5rem;">Save Changes ✓</button>
       </div>
     </div>
   </div>
 
-  <!-- ========================================================================
-       FOOTER
-       ======================================================================== -->
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <div>© 2026 <strong id="footerUsername">dionn001</strong> — Roblox Builder Developer Portfolio</div>
       <div class="footer-links">
         <a href="#top">Back to Top ↑</a>
-        <a href="https://www.roblox.com/search/users?keyword=dionn001" target="_blank" rel="noopener noreferrer">Roblox (@dionn001)</a>
+        <a href="#troubleshoot">Help / Website werkt niet</a>
       </div>
     </div>
   </footer>
 
-  <!-- ========================================================================
-       INTERACTIVE JAVASCRIPT
-       ======================================================================== -->
+  <!-- JAVASCRIPT -->
   <script>
-    // 1. Mobile Navigation Toggle
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinks = document.getElementById('navLinks');
+    mobileToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    mobileToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
-
-    // 2. Copy Roblox Username Helper
     function setupCopyButton(buttonElement, defaultText) {
       if (!buttonElement) return;
       buttonElement.addEventListener('click', async () => {
@@ -1545,32 +1367,24 @@
           const username = document.getElementById('customUsernameInput').value || 'dionn001';
           await navigator.clipboard.writeText(username);
           buttonElement.textContent = 'Copied! ✓';
-          setTimeout(() => {
-            buttonElement.textContent = defaultText;
-          }, 2000);
+          setTimeout(() => buttonElement.textContent = defaultText, 2000);
         } catch (err) {
           buttonElement.textContent = 'Copied!';
         }
       });
     }
-
     setupCopyButton(document.getElementById('copyUserBtn'), 'Copy');
     setupCopyButton(document.getElementById('copyUsernameFooterBtn'), 'Copy Username: dionn001');
 
-    // 3. Portfolio Category Filter
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         const filter = btn.getAttribute('data-filter');
-
         projectCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
             card.classList.remove('hidden');
           } else {
             card.classList.add('hidden');
@@ -1579,7 +1393,6 @@
       });
     });
 
-    // 4. Project Detail Modal
     const modal = document.getElementById('projectModal');
     const modalClose = document.getElementById('modalClose');
     const modalTitle = document.getElementById('modalTitle');
@@ -1592,25 +1405,19 @@
         modalTitle.textContent = btn.getAttribute('data-title');
         modalCategory.textContent = btn.getAttribute('data-category');
         modalDesc.textContent = btn.getAttribute('data-desc');
-
-        const points = btn.getAttribute('data-points').split('|');
         modalPoints.innerHTML = '';
-        points.forEach(point => {
+        btn.getAttribute('data-points').split('|').forEach(point => {
           const li = document.createElement('li');
           li.textContent = point;
           modalPoints.appendChild(li);
         });
-
         modal.classList.add('open');
       });
     });
-
     modalClose.addEventListener('click', () => modal.classList.remove('open'));
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('open');
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
 
-    // 5. Settings Modal & Password Protection (6767)
+    // SETTINGS MODAL & PASSWORD (6767)
     const settingsModal = document.getElementById('settingsModal');
     const openSettingsBtn = document.getElementById('openSettingsBtn');
     const settingsClose = document.getElementById('settingsClose');
@@ -1630,13 +1437,10 @@
     });
 
     settingsClose.addEventListener('click', () => settingsModal.classList.remove('open'));
-    settingsModal.addEventListener('click', (e) => {
-      if (e.target === settingsModal) settingsModal.classList.remove('open');
-    });
+    settingsModal.addEventListener('click', (e) => { if (e.target === settingsModal) settingsModal.classList.remove('open'); });
 
     submitPasswordBtn.addEventListener('click', () => {
-      const enteredPass = adminPasswordInput.value.trim();
-      if (enteredPass === '6767') {
+      if (adminPasswordInput.value.trim() === '6767') {
         passwordError.style.display = 'none';
         passwordSection.style.display = 'none';
         adminControlsSection.classList.add('active');
@@ -1645,16 +1449,14 @@
       }
     });
 
-    // Allow pressing Enter in password field
     adminPasswordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        submitPasswordBtn.click();
-      }
+      if (e.key === 'Enter') submitPasswordBtn.click();
     });
 
     saveSettingsBtn.addEventListener('click', () => {
       const newStatus = document.getElementById('customStatusInput').value;
       const newUsername = document.getElementById('customUsernameInput').value;
+      const newAvatarUrl = document.getElementById('customAvatarInput').value.trim();
 
       document.getElementById('heroStatusText').textContent = newStatus;
       document.getElementById('displayUsername').textContent = '@' + newUsername;
@@ -1662,19 +1464,20 @@
       document.getElementById('panelUserTag').textContent = '@' + newUsername;
       document.getElementById('footerUsername').textContent = newUsername;
 
+      if (newAvatarUrl) {
+        const avatarBox = document.getElementById('avatarBoxContainer');
+        avatarBox.innerHTML = `<img src="${newAvatarUrl}" alt="Avatar" />`;
+      }
+
       settingsModal.classList.remove('open');
     });
 
-    // 6. Scroll Reveal Animation
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.12 });
-
     revealElements.forEach(el => revealObserver.observe(el));
   </script>
 </body>
