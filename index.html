@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dion | Roblox Developer</title>
+  <style>
+    :root {
+      --bg: #0a1128;
+      --card: #111d4a;
+      --primary: #3b82f6;
+      --accent: #60a5fa;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1d4ed8, #0f172a);
+      padding: 5rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    header span {
+      color: var(--accent);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #2563eb;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      border-left: 4px solid var(--primary);
+      padding-left: 0.75rem;
+    }
+
+    .about-box {
+      background-color: var(--card);
+      padding: 1.75rem;
+      border-radius: 12px;
+      border: 1px solid #1e3a8a;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #1e3a8a;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--accent);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      border-top: 1px solid #1e293b;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hi, I'm <span>Dion</span></h1>
+    <p>Roblox Developer & Game Creator — experienced in building and developing across many different games.</p>
+    <a href="#projects" class="btn">View My Work</a>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about-box">
+        <p>
+          Welcome to my portfolio! My name is Dion and I am a passionate Roblox developer. 
+          Over time, I have worked as a developer on many different games, helping bring fun ideas, 
+          smooth mechanics, and engaging gameplay experiences to players on Roblox.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>What I Do</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Game Development</h3>
+          <p>Creating core gameplay systems, mechanics, and features across multiple Roblox titles.</p>
+          <span class="tag">Roblox Studio</span>
+        </div>
+        <div class="card">
+          <h3>Scripting & Systems</h3>
+          <p>Writing clean Luau scripts for player progression, tools, leaderboards, and game logic.</p>
+          <span class="tag">Luau</span>
+        </div>
+        <div class="card">
+          <h3>Multi-Game Experience</h3>
+          <p>Collaborating on various genres, from simulators and obbies to action and adventure games.</p>
+          <span class="tag">Team & Solo Dev</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Games</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Game Project #1</h3>
+          <p>Add the name of one of your Roblox games here and describe what you built for it.</p>
+          <span class="tag">Developer</span>
+        </div>
+        <div class="card">
+          <h3>Game Project #2</h3>
+          <p>Add another game you worked on here, including your role and favorite feature.</p>
+          <span class="tag">Developer</span>
+        </div>
+        <div class="card">
+          <h3>More Games</h3>
+          <p>Contributed to numerous other Roblox experiences and prototypes.</p>
+          <span class="tag">Various Roles</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Dion — Roblox Developer Portfolio</p>
+  </footer>
+
+</body>
+</html>
